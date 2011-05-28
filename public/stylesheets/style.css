@@ -13,7 +13,7 @@ body { font-family: Verdana; }
 #wa_btn { cursor: pointer; padding: 1ex 2em; font-family: Verdana; background-color: #0a0; color: #fff; border: 0px; font-size: 12pt; }
 #wa_btn:hover { background-color: #0c0; }
 
-#tabs > div { text-align: center; }
+#tabs > div { padding-top: 1ex; padding-bottom: 1ex; text-align: center; }
 
 #wt { border: 2px black solid; }
 
