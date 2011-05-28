@@ -1,2 +1,4 @@
-body { margin: 0px auto; position: relative; min-width: 800px; max-width: 800px; }
+.round { border-radius: 8px; -moz-border-radius: 8px; -webkit-border-radius: 8px; }
+
+#wa_btn { padding: 1ex 2em; font-family: Verdana; background-color: #0a0; color: #fff; border: 0px; font-size: 12pt; }
 
