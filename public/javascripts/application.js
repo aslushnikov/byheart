@@ -7,7 +7,7 @@ function log(s) {
 
 function add_word_to_table(word) {
     var s = '<tr><td>' + word.id + '</td><td>' + word.orig + '</td><td>' + word.trans + '</td><td>' + word.sample + '</td></tr>';
-    $('#wt').append(s);
+    $('#wt tbody').append(s);
 }
 
 function add() {
@@ -16,6 +16,12 @@ function add() {
         trans: $('#wa_trans').prop('value'),
         sample: $('#wa_sample').prop('value')
     };
+    if (word.orig.length == 0 || word.trans.length == 0) {
+        return;
+    }
+    $('#wa_orig').prop('value', '');
+    $('#wa_trans').prop('value', '');
+    $('#wa_sample').prop('value', '');
     // TODO: double quotes
     var ws = '[{orig:"' + word.orig + '", trans:"' + word.trans + '", sample:"' + word.sample + '"}]';
     $.ajax({
@@ -26,5 +32,6 @@ function add() {
             add_word_to_table(data[0].word);
         }
     });
+    $('#wa_orig').focus();
 }
 

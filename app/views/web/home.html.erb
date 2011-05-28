@@ -1,14 +1,25 @@
-<h1>BY heart</h1>
+<div id="userinfo">
+Hello, <span class="name"><%= current_user.name %></span>!<br/>
+<%= link_to "log out", destroy_user_session_path %>
+</div>
 
-<input type="text" id="wa_orig" name="wa_orig" placeholder="original">
-<input type="text" id="wa_trans" name="wa_trans" placeholder="translated">
-<input type="text" id="wa_sample" name="wa_sample" placeholder="sample">
-<input type="submit" id="wa_btn" class="round" value="Add" onclick="add()">
+<div id="logo">B<span class="green">Y</span> heart</div>
 
-<pre id="log"></pre>
+<div id="wa" class="round">
+<input type="text" id="wa_orig" class="roundsmall" name="wa_orig" placeholder="original" tabindex="1">
+<input type="text" id="wa_trans" class="roundsmall" name="wa_trans" placeholder="translated" tabindex="2">
+<input type="text" id="wa_sample" class="roundsmall" name="wa_sample" placeholder="sample" tabindex="3">
+<input type="submit" id="wa_btn" class="round" value="Add" onclick="add()" tabindex="4">
+</div>
 
-<table id="wt">
-<th><td>#</td><td>original</td><td>translation</td><td>sample</td></th>
+<div id="tabs">
+<div id="tab1" class="span-4 prepend-6">tab1</div>
+<div id="tab2" class="span-4">tab2</div>
+<div id="tab3" class="span-4 append-6 last">tab3</div>
+</div>
+
+<table id="wt"><thead>
+<tr><th>#</th><th>original</th><th>translation</th><th>sample</th></tr></thead><tbody>
 <% current_user.words.each do |word| %>
 <tr>
 <td><%= word.id %></td>
@@ -17,5 +28,13 @@
 <td><%= word.sample %></td>
 </tr>
 <% end %>
+</tbody>
 </table>
 
+
+
+
+
+
+
+<pre id="log"></pre>

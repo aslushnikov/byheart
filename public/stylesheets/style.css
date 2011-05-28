@@ -1,4 +1,19 @@
-.round { border-radius: 8px; -moz-border-radius: 8px; -webkit-border-radius: 8px; }
+#logo { font-family: Courier New; font-weight: bold; font-size: 26pt; }
+.green { color: #0a0; }
 
-#wa_btn { padding: 1ex 2em; font-family: Verdana; background-color: #0a0; color: #fff; border: 0px; font-size: 12pt; }
+body { font-family: Verdana; } 
+
+#userinfo { float: right; }
+#userinfo .name { font-weight: bold; }
+
+.round { border-radius: 8px; -moz-border-radius: 8px; -webkit-border-radius: 8px; }
+.roundsmall { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
+
+#wa { background: #aaa url('/images/bkwa.jpg') repeat; padding: 1em; }
+#wa_btn { cursor: pointer; padding: 1ex 2em; font-family: Verdana; background-color: #0a0; color: #fff; border: 0px; font-size: 12pt; }
+#wa_btn:hover { background-color: #0c0; }
+
+#tabs > div { text-align: center; }
+
+#wt { border: 2px black solid; }
 
