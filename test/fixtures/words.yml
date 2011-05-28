@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  orig: MyString
+  trans: MyString
+  sample: MyString
+  orig_show: 1
+  orig_succ: 1
+  trans_show: 1
+  trans_succ: 1
+
+two:
+  orig: MyString
+  trans: MyString
+  sample: MyString
+  orig_show: 1
+  orig_succ: 1
+  trans_show: 1
+  trans_succ: 1
