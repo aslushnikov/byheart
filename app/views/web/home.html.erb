@@ -1,0 +1,21 @@
+<h1>Web#home</h1>
+
+<input type="text" id="orig" name="orig" placeholder="original">
+<input type="text" id="trans" name="trans" placeholder="translated">
+<input type="text" id="sample" name="sample" placeholder="sample">
+<input type="submit" value="add" onclick="add()">
+
+<pre id="log"></pre>
+
+<table id="wt">
+<tr><td>#</td><td>original</td><td>translation</td><td>sample</td></tr>
+<% current_user.words.each do |word| %>
+<tr>
+<td><%= word.id %></td>
+<td><%= word.orig %></td>
+<td><%= word.trans %></td>
+<td><%= word.sample %></td>
+</tr>
+<% end %>
+</table>
+
