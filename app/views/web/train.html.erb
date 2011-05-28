@@ -27,8 +27,8 @@
     function new_word() {
         var curNew = $("#words .new");
         curNew.removeClass("new");
-        curNew.children("#buttons").toggle(200);
-        curNew.children("#opposite").show();
+        curNew.children("#buttons").toggle(400);
+        curNew.children("#opposite").fadeIn();
         curNew.children("a").hide();
         
         cur_word = words[Math.floor(Math.random() * words.length)].word;
@@ -38,7 +38,7 @@
         newdiv.children("#opposite").html(cur_word.trans);
         newdiv.addClass("new");
         $("#words").prepend(newdiv);
-        newdiv.toggle(200);
+        newdiv.toggle(400);
     }
 
     function succ() {
@@ -53,7 +53,7 @@
 </script>
 
 
-<div id="template" class="notice hide">
+<div id="template" class="notice hide round">
     <div id="word"></div>
     <a href="javascript:$('.new').children('#opposite').toggle(200)">translation</a>
     <div id="opposite" class="hide"></div>
