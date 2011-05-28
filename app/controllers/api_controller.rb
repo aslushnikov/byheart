@@ -41,6 +41,32 @@ class ApiController < ApplicationController
     end
   end
 
+  def commit_stats
+    begin
+      stats = ActiveSupport::JSON.decode(request.raw_post) 
+      if !stats.is_a? Array
+        raise "Bad format!"
+      end
+      words = []
+      stats.each do |word_stat|
+        if !word_stat.is_a? Hash
+          raise "Bad format!"
+        end
+        w = Word.find_by_id(word_stat["id"])
+        raise "Bad format!" if w.nil? 
+        w.orig_show += word_stat["orig_show"].to_i
+        w.orig_succ += word_stat["orig_succ"].to_i
+        w.trans_show += word_stat["trans_show"].to_i
+        w.trans_succ += word_stat["trans_succ"].to_i
+        words << w
+      end
+      words.each { |w| w.save }
+      render :json => words
+    rescue
+      head :bad_request and return
+    end
+  end
+
   protected
     def forbid_user!
       if !user_signed_in?
