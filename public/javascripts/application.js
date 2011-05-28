@@ -6,9 +6,23 @@ function log(s) {
 }
 
 function add_word_to_table(word) {
-    var s = '<tr class="word' + word.id + '"><td>' + word.id + '</td><td>' + word.orig + '</td><td>' + word.trans + '</td><td>' + word.sample + '</td></tr>';
-    
-    $('#wt table tbody').append(s);
+    var s = '<td>' + word.id + '</td><td>' + word.orig + '</td><td>' + word.trans + '</td><td>' + word.sample + '</td>';
+    s += '<td><img src="/images/delete.png"><img src="/images/edit_word.png"></td>'
+    var row = $('<tr></tr>');
+    row.html(s);
+    row.addClass('word' + word.id);
+    row.mouseover(function() {
+        var arr = $('.word' + word.id + ' td')
+        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#ccffcc';
+    });
+    row.mouseout(function() {
+        var arr = $('.word' + word.id + ' td')
+        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#fff';
+    });
+    row.click(function() {
+        log(word.id);
+    });
+    $('#wt table tbody').append(row);
 }
 
 function add() {

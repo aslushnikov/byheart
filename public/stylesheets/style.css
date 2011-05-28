@@ -21,7 +21,6 @@ body { font-family: Verdana; }
 #wt { text-align: center; margin: 1em auto 0px auto; width: 80%; }
 #wt table { border: 2px black solid; }
 #wt table tbody * { cursor: pointer; background-color: #fff; }
-#wt table tbody tr :hover { background-color: #0f0; }
 
 
 
