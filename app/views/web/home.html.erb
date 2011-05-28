@@ -1,14 +1,14 @@
-<h1>Web#home</h1>
+<h1>BY heart</h1>
 
-<input type="text" id="orig" name="orig" placeholder="original">
-<input type="text" id="trans" name="trans" placeholder="translated">
-<input type="text" id="sample" name="sample" placeholder="sample">
-<input type="submit" value="add" onclick="add()">
+<input type="text" id="wa_orig" name="wa_orig" placeholder="original">
+<input type="text" id="wa_trans" name="wa_trans" placeholder="translated">
+<input type="text" id="wa_sample" name="wa_sample" placeholder="sample">
+<input type="submit" id="wa_btn" class="round" value="Add" onclick="add()">
 
 <pre id="log"></pre>
 
 <table id="wt">
-<tr><td>#</td><td>original</td><td>translation</td><td>sample</td></tr>
+<th><td>#</td><td>original</td><td>translation</td><td>sample</td></th>
 <% current_user.words.each do |word| %>
 <tr>
 <td><%= word.id %></td>

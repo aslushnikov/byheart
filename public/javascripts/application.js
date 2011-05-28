@@ -12,9 +12,9 @@ function add_word_to_table(word) {
 
 function add() {
     var word = {
-        orig: $('#orig').prop('value'), 
-        trans: $('#trans').prop('value'),
-        sample: $('#sample').prop('value')
+        orig: $('#wa_orig').prop('value'), 
+        trans: $('#wa_trans').prop('value'),
+        sample: $('#wa_sample').prop('value')
     };
     // TODO: double quotes
     var ws = '[{orig:"' + word.orig + '", trans:"' + word.trans + '", sample:"' + word.sample + '"}]';
