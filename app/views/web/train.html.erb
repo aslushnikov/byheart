@@ -1,20 +1,47 @@
 <script type="text/javascript">
     var words = <%= @words.to_json.html_safe %>;
 
+    $(document).ready(function() {
+///        $('#template').hide();
+        new_word();
+    });
+
     function new_word() {
-        var newWordDiv = $("#words .error");
-        $(newWordDiv).addClass("notice");
-         
+        var curNew = $("#words .new");
+        curNew.removeClass("new");
+        curNew.children("#buttons").toggle(200);
+        curNew.children("#opposite").show();
+        curNew.children("a").hide();
+        
         var w = words[Math.floor(Math.random() * words.length)].word;
-        var div = $("<div></div>");
-        div.html(w.orig);
-        div.addClass("error");
-        $("#words").prepend(div);
+        var newdiv = $("#template").clone();
+        newdiv.removeAttr("id");
+        newdiv.children("#word").html(w.orig);
+        newdiv.children("#opposite").html(w.trans);
+        newdiv.addClass("new");
+        $("#words").prepend(newdiv);
+        newdiv.toggle(200);
+    }
+
+    function succ() {
+        $(".new").removeClass("notice").addClass("success");
+    }
+
+    function fail() {
+        $(".new").removeClass("notice").addClass("error");
     }
 </script>
 
-<span class="large" id="button" style="background: green; border:1px solid black;" onclick="new_word();">click</span>
+
+<div id="template" class="notice hide">
+    <div id="word"></div>
+    <a href="javascript:$('.new').children('#opposite').toggle(200)">translation</a>
+    <div id="opposite" class="hide"></div>
+    <div id="buttons">
+        <input type="button" value="шарю" onclick="succ();new_word()"/>
+        <input type="button" value="НЕ шарю" onclick="fail();new_word()"/>
+    </div>
+</div>
 
 <div id="words">
-    <div class="error">bitch</div>
 </div>
