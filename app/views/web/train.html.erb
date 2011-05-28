@@ -1,10 +1,28 @@
 <script type="text/javascript">
     var words = <%= @words.to_json.html_safe %>;
+    var cur_word = null;
 
     $(document).ready(function() {
 ///        $('#template').hide();
         new_word();
     });
+
+    function send_stats(succ) {
+        var dt = '[{"id":' + cur_word.id + ', "orig_show":' + 1 
+        if (succ) {
+            dt += ', "orig_succ" : 1'
+        }         
+        dt += '}]';
+        $.ajax({
+            type: 'POST',
+            url: '/api/commit_stats',
+            data: dt,
+            success: function(data) {
+                console.debug("stats updated");  
+            }
+        });
+
+    }
 
     function new_word() {
         var curNew = $("#words .new");
@@ -13,11 +31,11 @@
         curNew.children("#opposite").show();
         curNew.children("a").hide();
         
-        var w = words[Math.floor(Math.random() * words.length)].word;
+        cur_word = words[Math.floor(Math.random() * words.length)].word;
         var newdiv = $("#template").clone();
         newdiv.removeAttr("id");
-        newdiv.children("#word").html(w.orig);
-        newdiv.children("#opposite").html(w.trans);
+        newdiv.children("#word").html(cur_word.orig);
+        newdiv.children("#opposite").html(cur_word.trans);
         newdiv.addClass("new");
         $("#words").prepend(newdiv);
         newdiv.toggle(200);
@@ -25,10 +43,12 @@
 
     function succ() {
         $(".new").removeClass("notice").addClass("success");
+        send_stats(true);
     }
 
     function fail() {
         $(".new").removeClass("notice").addClass("error");
+        send_stats(false);
     }
 </script>
 
