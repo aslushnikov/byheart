@@ -1,4 +1,8 @@
 <h1>Pages#home</h1>
-<%= link_to "sign in", new_user_session_path %></br>
-<%= link_to "sign up", new_user_registration_path %></br>
+<% if !user_signed_in? %>
+    <%= link_to "sign in", new_user_session_path %></br>
+    <%= link_to "sign up", new_user_registration_path %></br>
+<% else %>
+    <%= link_to "sign out", destroy_user_session_path %>
+<% end %>
 <p>This page will see unregistered users. Find me in app/views/pages/home.html.erb</p>
