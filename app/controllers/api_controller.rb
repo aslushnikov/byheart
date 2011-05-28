@@ -30,6 +30,17 @@ class ApiController < ApplicationController
     end
   end
 
+  def delete
+    w = Word.find_by_id(params[:id])
+    # check
+    head :not_found and return if w.nil?
+    if w.user == current_user
+      w.destroy and head :ok
+    else
+      head :forbidden
+    end
+  end
+
   protected
     def forbid_user!
       if !user_signed_in?

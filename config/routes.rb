@@ -6,6 +6,7 @@ Byheart::Application.routes.draw do
   get 'api/check_auth'
   post 'api/add_words'
   get 'api/all_words'
+  post "api/delete/:id" => "api#delete"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
