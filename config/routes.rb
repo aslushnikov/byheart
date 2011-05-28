@@ -10,6 +10,7 @@ Byheart::Application.routes.draw do
   get 'api/all_words'
   post "api/delete/:id" => "api#delete"
   post "api/commit_stats"
+  post "api/edit/:id" => "api#edit"
 
   get 'web' => "web#home"
 
