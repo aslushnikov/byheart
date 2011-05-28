@@ -1,15 +1,14 @@
-<table id="wt"><thead>
+<div id="wt">
+<table><thead>
 <tr><th>#</th><th>original</th><th>translation</th><th>sample</th></tr></thead><tbody>
+<script type="text/javascript">
 <% current_user.words.each do |word| %>
-<tr>
-<td><%= word.id %></td>
-<td><%= word.orig %></td>
-<td><%= word.trans %></td>
-<td><%= word.sample %></td>
-</tr>
+add_word_to_table({id: "<%= word.id %>", orig: "<%= word.orig %>", trans: "<%= word.trans %>", sample: "<%= word.sample %>"});
 <% end %>
+</script>
 </tbody>
 </table>
+</div>
 
 
 

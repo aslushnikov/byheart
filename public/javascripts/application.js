@@ -6,8 +6,9 @@ function log(s) {
 }
 
 function add_word_to_table(word) {
-    var s = '<tr><td>' + word.id + '</td><td>' + word.orig + '</td><td>' + word.trans + '</td><td>' + word.sample + '</td></tr>';
-    $('#wt tbody').append(s);
+    var s = '<tr class="word' + word.id + '"><td>' + word.id + '</td><td>' + word.orig + '</td><td>' + word.trans + '</td><td>' + word.sample + '</td></tr>';
+    
+    $('#wt table tbody').append(s);
 }
 
 function add() {
