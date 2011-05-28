@@ -41,7 +41,7 @@ function add() {
     var ws = '[{orig:"' + word.orig + '", trans:"' + word.trans + '", sample:"' + word.sample + '"}]';
     $.ajax({
         type: 'POST',
-        url: 'api/add_words',
+        url: '/api/add_words',
         data: ws,
         success: function(data) {
             add_word_to_table(data[0].word);
