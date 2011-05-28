@@ -1,6 +1,11 @@
 <script type="text/javascript">
     var words = <%= @words.to_json.html_safe %>;
+    var train_direction = <%= "\"#{@train_mode}\"".html_safe %>;
     var cur_word = null;
+    
+    function direction() {
+        return train_direction == "orig";
+    }
 
     $(document).ready(function() {
 ///        $('#template').hide();
@@ -8,9 +13,10 @@
     });
 
     function send_stats(succ) {
-        var dt = '[{"id":' + cur_word.id + ', "orig_show":' + 1 
+        var token = direction() ? "orig" : "trans";
+        var dt = '[{"id":' + cur_word.id + ', "' + token + '_show":' + 1 
         if (succ) {
-            dt += ', "orig_succ" : 1'
+            dt += ', "' + token + '_succ" : 1'
         }         
         dt += '}]';
         $.ajax({
@@ -34,20 +40,20 @@
         cur_word = words[Math.floor(Math.random() * words.length)].word;
         var newdiv = $("#template").clone();
         newdiv.removeAttr("id");
-        newdiv.children("#word").html(cur_word.orig);
-        newdiv.children("#opposite").html(cur_word.trans);
+        newdiv.children("#word").html(direction() ? cur_word.orig : cur_word.trans);
+        newdiv.children("#opposite").html(direction() ?cur_word.trans : cur_word.orig);
         newdiv.addClass("new");
         $("#words").prepend(newdiv);
         newdiv.toggle(400);
     }
 
     function succ() {
-        $(".new").removeClass("notice").addClass("success");
+        $("#words .new").removeClass("notice").addClass("success");
         send_stats(true);
     }
 
     function fail() {
-        $(".new").removeClass("notice").addClass("error");
+        $("#words .new").removeClass("notice").addClass("error");
         send_stats(false);
     }
 </script>
@@ -55,7 +61,7 @@
 
 <div id="template" class="notice hide round">
     <div id="word"></div>
-    <a href="javascript:$('.new').children('#opposite').toggle(200)">translation</a>
+    <a href="javascript:$('#words .new').children('#opposite').toggle(200)">translation</a>
     <div id="opposite" class="hide"></div>
     <div id="buttons">
         <input type="button" value="шарю" onclick="succ();new_word()"/>

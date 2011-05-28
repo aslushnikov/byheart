@@ -4,7 +4,15 @@ class WebController < ApplicationController
   def home
   end
 
-  def train
+  def train_orig
     @words = current_user.words
+    @train_mode = "orig"
+    render :train
+  end
+
+  def train_trans
+    @words = current_user.words
+    @train_mode = "trans"
+    render :train
   end
 end

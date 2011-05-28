@@ -1,6 +1,7 @@
 Byheart::Application.routes.draw do
   get "web/home"
-  get "web/train"
+  get "web/train_orig"
+  get "web/train_trans"
 
   devise_for :users
 
