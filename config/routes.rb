@@ -4,6 +4,7 @@ Byheart::Application.routes.draw do
   root :to => "pages#home"
 
   get 'api/check_auth'
+  get 'api/all_words'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
