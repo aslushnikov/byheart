@@ -4,4 +4,7 @@ class WebController < ApplicationController
   def home
   end
 
+  def train
+    @words = current_user.words
+  end
 end

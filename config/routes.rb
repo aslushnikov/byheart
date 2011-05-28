@@ -1,5 +1,6 @@
 Byheart::Application.routes.draw do
   get "web/home"
+  get "web/train"
 
   devise_for :users
 
@@ -12,7 +13,6 @@ Byheart::Application.routes.draw do
   post "api/commit_stats"
   post "api/edit/:id" => "api#edit"
 
-  get 'web' => "web#home"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

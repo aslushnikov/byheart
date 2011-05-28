@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    var words = <%= @words.to_json.html_safe %>;
+
+    function new_word() {
+        var newWordDiv = $("#words .error");
+        $(newWordDiv).addClass("notice");
+         
+        var w = words[Math.floor(Math.random() * words.length)].word;
+        var div = $("<div></div>");
+        div.html(w.orig);
+        div.addClass("error");
+        $("#words").prepend(div);
+    }
+</script>
+
+<span class="large" id="button" style="background: green; border:1px solid black;" onclick="new_word();">click</span>
+
+<div id="words">
+    <div class="error">bitch</div>
+</div>
