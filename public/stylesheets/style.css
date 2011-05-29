@@ -21,12 +21,12 @@ body { font-family: Verdana; font-size: 10pt; }
 #search { float: left; margin: 0px auto; }
 
 #wt { text-align: center; margin: 1em auto 0px auto; width: 80%; float: right; }
-#wt table { border: 1px solid black; border-top: none; border-bottom: none; border-collapse: collapse; }
-#wt table :not(.lastcol) { background: #eee url('/images/bkwt.jpg') repeat; }
-#wt table thead th { border-top: 1px black solid; }
+#wt table { border: 1px solid #777; border-top: none; border-bottom: none; border-collapse: collapse; }
+#wt table thead th, #wt table tbody td { border-right: 1px #777 solid; }
+#wt table thead th { background-color: white; border-top: 1px #777 solid; border-bottom: 1px #777 solid; }
 #wt table tbody * { cursor: pointer; background-color: white; }
 #wt table tbody input { cursor: text; }
-#wt table *.prelastcol { border-right: 1px black solid; }
+#wt table *.prelastcol { border-right: 1px #777 solid; }
 #wt table *.lastcol { border-right: 1px white solid; background-color: white !important; }
 
 #wt table thead th:first-child { display: none; }
@@ -35,7 +35,9 @@ body { font-family: Verdana; font-size: 10pt; }
 #wt table thead th:nth-child(2), #wt table tbody td:nth-child(2) { min-width: 100px; max-width: 100px; display: table-cell; word-wrap: break-word; }
 #wt table thead th:nth-child(3), #wt table tbody td:nth-child(3) { min-width: 100px; max-width: 100px; display: table-cell; word-wrap: break-word; }
 #wt table thead th:nth-child(4), #wt table tbody td:nth-child(4) { min-width: 300px; max-width: 300px; display: table-cell; word-wrap: break-word; }
-#wt table thead th:nth-child(5), #wt table tbody td:nth-child(5) { margin: 0px auto; }
+#wt table thead th:nth-child(5), #wt table tbody td:nth-child(5) { min-width: 38px; max-width: 38px; display: table-cell; word-wrap: break-word; }
+#wt table thead th:nth-child(6), #wt table tbody td:nth-child(6) { min-width: 40px; max-width: 40px; display: table-cell; word-wrap: break-word; }
+#wt table thead th:nth-child(7), #wt table tbody td:nth-child(7) { margin: 0px auto; }
 
 .editwordinput { font-size: 12pt; width: 100%; }
 
@@ -46,8 +48,8 @@ body { font-family: Verdana; font-size: 10pt; }
 .tw .kbtn:hover { background-color: #0c0; }
 .tw .dkbtn { background-color: #a00; }
 .tw .dkbtn:hover { background-color: #c00; }
-.tw .word { font-size: 28pt; }
-.tw .opposite { font-size: 14pt; }
+.tw .word { font-size: 28pt; word-wrap: break-word; }
+.tw .opposite { font-size: 14pt; word-wrap: break-word; }
 .tw .trlink, .tw .opposite { margin-bottom: 1em; }
 .tw .trlink a { color: #888 !important; }
 

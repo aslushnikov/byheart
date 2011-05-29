@@ -23,15 +23,24 @@ function update_table_view() {
 }
 
 function edit_word_in_table(id) {
+    confirm_edit_word_in_table();
     $('.word' + id + ' .tdshow').css('display', 'none');
     $('.word' + id + ' .tdedit').css('display', 'inline');
     update_table_view();
     $($('.word' + id + ' .tdedit.orig input')[0]).focus();
 }
 
-function confirm_edit_word_in_table(event) {
+function on_input_key_enter(event) {
     event = event || window.event;
     if (event.keyCode != 13) return;
+    confirm_edit_word_in_table();
+}
+
+function on_input_blur() {
+    // confirm_edit_word_in_table();
+}
+
+function confirm_edit_word_in_table() {
     for (var wordn = 0; wordn < words.length; wordn++) {
         var changed = false;
         var id = words[wordn].word.id;
@@ -95,7 +104,7 @@ function add_word_to_table(word) {
         s += '">' + fields[i] + '</span>';
         s += '<span class="tdedit wrd ' + fieldnames[i] + '" style="display: none;">';
         if (i <= 3) {
-            s += '<input onkeypress="confirm_edit_word_in_table(event)" class="editwordinput" type="text" value="' + fields[i] + '">';
+            s += '<input onkeypress="on_input_key_enter(event)" class="editwordinput" type="text" value="' + fields[i] + '">';
         } else {
             s += fields[i];
         }
@@ -111,9 +120,9 @@ function add_word_to_table(word) {
     row.addClass('word' + word.id);
     row.mouseover(function() {
         var arr = $('.word' + word.id + ' td');
-        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#cfc';
+        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#eee';
         arr = $('.word' + word.id + ' td span.wrd');
-        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#cfc';
+        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#eee';
         arr = $('.ctrl' + word.id);
         arr[0].style.visibility = 'visible';
     });
