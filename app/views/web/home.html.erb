@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $('body').css('overflow-y', 'scroll');
     String.prototype.has = function(str){
-        return (this.indexOf(str) >= 0);
+        return (this.toLowerCase().indexOf(str) >= 0);
     }
     var words = <%= @words.to_json.html_safe %>;
     $(document).ready(function(){
@@ -11,6 +11,7 @@
     });
 
     function update_table(prefix) {
+        prefix = prefix.toLowerCase();
         $.each(words, function(index, value) {
             word = value.word;
             if (word.trans.has(prefix) || 
@@ -29,7 +30,7 @@
 <input type="field" onkeyup="update_table(this.value)" placeholder="search" tabindex="5"/>
 <div id="import">
 <%= form_tag({:controller => "csv", :action => 'upload'}, :multipart => true) do %>
-    <%= file_field_tag "data"%>
+    <%= file_field_tag "data", :accept => "text/csv", :value => "csv"%>
     <%= submit_tag 'import' %>
 <% end %> 
 <hr/>
