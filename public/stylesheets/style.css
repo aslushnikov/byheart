@@ -22,6 +22,8 @@ body { font-family: Verdana; }
 #wt table { border: 1px solid black; border-top: none; border-bottom: none; border-collapse: collapse; }
 #wt table thead th { border-top: 1px black solid; }
 #wt table tbody * { cursor: pointer; background-color: white; }
+#wt table tbody input { cursor: text; }
+#wt table tbody span.tdedit { width: 80%; }
 #wt table *.prelastcol { border-right: 1px black solid; }
 #wt table tbody > tr:last-child { border-bottom: 1px black solid; }
 #wt table *.lastcol { border-right: 1px white solid; background-color: white !important; }

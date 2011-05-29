@@ -6,8 +6,43 @@ function log(s) {
 }
 
 function edit_word_in_table(id) {
-    log('edit ' + id);
+    $('.word' + id + ' .tdshow').css('display', 'none');
+    $('.word' + id + ' .tdedit').css('display', 'inline');
 }
+
+function confirm_edit_word_in_table(event) {
+    event = event || window.event;
+    if (event.keyCode != 13) return;
+    for (var wordn = 0; wordn < words.length; wordn++) {
+        var changed = false;
+        var id = words[wordn].word.id;
+        log('id ' + id);
+        var arr1 = $('.word' + id + ' .tdshow');
+        var arr2 = $('.word' + id + ' .tdedit input');
+        log(arr1.length + ' ' + arr2.length);
+        for (var i = 0; i < arr1.length; i++) {
+            if ($(arr1[i]).html() != arr2[i].value) {
+                $(arr1[i]).html(arr2[i].value);
+                changed = true;
+            }
+        }
+        $('.tdshow').css('display', 'inline');
+        $('.tdedit').css('display', 'none');
+        if (changed) {
+            words[wordn].word.id = $('.word' + id + ' .id').html();
+            words[wordn].word.orig = $('.word' + id + ' .orig').html();
+            words[wordn].word.trans = $('.word' + id + ' .trans').html();
+            words[wordn].word.sample = $('.word' + id + ' .sample').html();
+            log(words[wordn]);
+            $.ajax({
+                type: 'POST',
+                url: '/api/edit/' + id,
+                data: words[wordn].word
+            });
+        }
+    }
+}
+
 
 function delete_word_from_table(id) {
     $('.word' + id).remove();
@@ -19,10 +54,17 @@ function delete_word_from_table(id) {
 
 function add_word_to_table(word) {
     var s = '';
-    var fields = [word.id, word.orig, word.trans];
-    for (var i = 0; i < fields.length; i++)
-        s += '<td><span class="tdshow">' + fields[i] + '</span><span class="tdedit"></span></td>';
-    s += '<td class="prelastcol">' + word.sample + '</td>';
+    var fields = [word.id, word.orig, word.trans, word.sample];
+    var fieldnames = ['id', 'orig', 'trans', 'sample'];
+    for (var i = 0; i < fields.length; i++) {
+        s += '<td';
+        if (i == fields.length - 1) s += ' class="prelastcol"';
+        s += '><span class="tdshow wrd ' + fieldnames[i];
+        s += '">' + fields[i] + '</span>';
+        s += '<span class="tdedit wrd" style="display: none;">';
+        s += '<input onkeypress="confirm_edit_word_in_table(event)" type="text" value="' + fields[i] + '">';
+        s += '</span></td>';
+    }
     s += '<td class="lastcol"><span class="ctrl' + word.id + '" style="visibility: hidden;">';
     s += '<span onclick="edit_word_in_table(' + word.id + ')"><img src="/images/edit_word.png"></span>';
     s += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -32,13 +74,17 @@ function add_word_to_table(word) {
     row.html(s);
     row.addClass('word' + word.id);
     row.mouseover(function() {
-        var arr = $('.word' + word.id + ' td')
-        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#ccffcc';
+        var arr = $('.word' + word.id + ' td');
+        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#cfc';
+        arr = $('.word' + word.id + ' td span.wrd');
+        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#cfc';
         arr = $('.ctrl' + word.id);
         arr[0].style.visibility = 'visible';
     });
     row.mouseout(function() {
         var arr = $('.word' + word.id + ' td')
+        for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#fff';
+        arr = $('.word' + word.id + ' td span.wrd');
         for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#fff';
         arr = $('.ctrl' + word.id);
         arr[0].style.visibility = 'hidden';
