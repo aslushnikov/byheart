@@ -25,7 +25,7 @@ class CsvController < ApplicationController
       w = Word.new(:orig => row[0], :trans => row[1], :sample => row[2])
       current_user.words << w
     end
-    
+    redirect_to root_path    
   end
 
 end
