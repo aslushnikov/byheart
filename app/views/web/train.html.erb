@@ -36,7 +36,7 @@
         newdiv.children(".word").html(direction() ? cur_word.orig : cur_word.trans);
         newdiv.children(".opposite").html(direction() ?cur_word.trans : cur_word.orig);
         $("#words").prepend(newdiv);
-        newdiv.slideToggle(ANIMATION_SPEED);
+        newdiv.slideDown(ANIMATION_SPEED);
     }
 
     function correct_current() {
