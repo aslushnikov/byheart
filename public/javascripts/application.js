@@ -110,6 +110,7 @@ function add() {
         data: ws,
         success: function(data) {
             add_word_to_table(data[0].word);
+            words.push(eval(data));
         }
     });
     $('#wa_orig').focus();
