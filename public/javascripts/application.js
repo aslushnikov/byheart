@@ -40,6 +40,12 @@ function on_input_blur() {
     // confirm_edit_word_in_table();
 }
 
+function on_add_word_click(event) {
+    event = event || window.event;
+    if (event.keyCode != 13) return;
+    add();
+}
+
 function confirm_edit_word_in_table() {
     for (var wordn = 0; wordn < words.length; wordn++) {
         var changed = false;
