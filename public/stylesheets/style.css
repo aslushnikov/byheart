@@ -37,7 +37,7 @@ body { font-family: Verdana; font-size: 10pt; }
 #wt table thead th:nth-child(4), #wt table tbody td:nth-child(4) { min-width: 300px; max-width: 300px; display: table-cell; word-wrap: break-word; }
 #wt table thead th:nth-child(5), #wt table tbody td:nth-child(5) { margin: 0px auto; }
 
-.editwordinput { font-size: 12pt; }
+.editwordinput { font-size: 12pt; width: 100%; }
 
 
 .tw, #words .wordok, #words .wordno { background: #eee url('/images/bkwt.jpg'); padding: 1ex; text-align: center; width: 70%; margin: 1em auto 0px auto; }
@@ -47,6 +47,7 @@ body { font-family: Verdana; font-size: 10pt; }
 .tw .dkbtn { background-color: #a00; }
 .tw .dkbtn:hover { background-color: #c00; }
 .tw .word { font-size: 28pt; }
+.tw .opposite { font-size: 14pt; }
 .tw .trlink, .tw .opposite { margin-bottom: 1em; }
 .tw .trlink a { color: #888 !important; }
 
