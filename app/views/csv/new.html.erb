@@ -1,0 +1,5 @@
+<%= form_tag({:action => 'upload'}, :multipart => true) do %>
+    <%= label_tag "CSV file" %>
+    <%= file_field_tag "data" %>
+    <%= submit_tag 'send' %>
+<% end %> 

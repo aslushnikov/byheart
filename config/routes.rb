@@ -1,4 +1,9 @@
 Byheart::Application.routes.draw do
+  get "csv/download"
+
+  post "csv/upload"
+  get "csv/upload" => "csv#new"
+
   get "web/home"
   get "web/train_orig"
   get "web/train_trans"
