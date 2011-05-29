@@ -1,17 +1,16 @@
 <script type="text/javascript">
+    var ANIMATION_SPEED = 200; // in ms
     var words = <%= @words.to_json.html_safe %>;
     var train_direction = <%= "\"#{@train_mode}\"".html_safe %>;
     var cur_word = null;
     
+    // возвращает true, если направление eng -> rus, и false в противном случае
     function direction() {
         return train_direction == "orig";
     }
 
-    $(document).ready(function() {
-///        $('#template').hide();
-        new_word();
-    });
 
+    // посылает статистику +1 по слову на сервак
     function send_stats(succ) {
         var token = direction() ? "orig" : "trans";
         var dt = '[{"id":' + cur_word.id + ', "' + token + '_show":' + 1 
@@ -30,40 +29,51 @@
 
     }
 
-    function new_word() {
-        var curNew = $("#words .new");
-        curNew.removeClass("new");
-        curNew.children("#buttons").toggle(400);
-        curNew.children("#opposite").fadeIn();
-        curNew.children("a").hide();
-        
+    function add_word() {
         cur_word = words[Math.floor(Math.random() * words.length)].word;
         var newdiv = $("#template").clone();
-        newdiv.removeAttr("id");
-        newdiv.children("#word").html(direction() ? cur_word.orig : cur_word.trans);
-        newdiv.children("#opposite").html(direction() ?cur_word.trans : cur_word.orig);
-        newdiv.addClass("new");
+        newdiv.attr("id", "new");
+        newdiv.children(".word").html(direction() ? cur_word.orig : cur_word.trans);
+        newdiv.children(".opposite").html(direction() ?cur_word.trans : cur_word.orig);
         $("#words").prepend(newdiv);
-        newdiv.toggle(400);
+        newdiv.slideToggle(ANIMATION_SPEED);
     }
 
+    function correct_current() {
+        var curNew = $("#words #new");
+        curNew.removeAttr("id");
+        curNew.children(".buttons").slideUp(ANIMATION_SPEED);
+        curNew.children(".opposite").show();
+        curNew.children("a").hide();
+    }
+
+    // показывает новое слово
+    function new_word() {
+        correct_current();
+        add_word();
+    }
+
+    // действия, если чувак считает, что знает это слово
     function succ() {
-        $("#words .new").removeClass("notice").addClass("success");
+        $("#words #new").removeClass("notice").addClass("success");
         send_stats(true);
     }
 
+    // действия, если чувак считает, что _не_ знает это слово
     function fail() {
-        $("#words .new").removeClass("notice").addClass("error");
+        $("#words #new").removeClass("notice").addClass("error");
         send_stats(false);
     }
+    $(document).ready(function() {
+        add_word();
+    });
 </script>
 
-
 <div id="template" class="notice hide round">
-    <div id="word"></div>
-    <a href="javascript:$('#words .new').children('#opposite').toggle(200)">translation</a>
-    <div id="opposite" class="hide"></div>
-    <div id="buttons">
+    <div class="word"></div>
+    <a href="javascript:$('#words #new').children('.opposite').slideToggle(ANIMATION_SPEED)">translation</a>
+    <div class="opposite hide"></div>
+    <div class="buttons">
         <input type="button" value="шарю" onclick="succ();new_word()"/>
         <input type="button" value="НЕ шарю" onclick="fail();new_word()"/>
     </div>
