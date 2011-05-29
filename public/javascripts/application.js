@@ -86,20 +86,23 @@ function delete_word_from_table(id) {
     });
 }
 
+function calc_color(percentage) {
+    return "000000";
+}
+
+function stat_count(succ, show) {
+    if (show == 0) {
+        return '';
+    } else {
+        // return '<span style="color: #' + calc_color(p) + '">' + word.orig_succ + ' / ' + word.orig_show + '</span>';
+        return succ + ' / ' + show;
+    }
+}
+
 function add_word_to_table(word) {
     var s = '';
-    var p1 = parseFloat(word.orig_succ) / parseFloat(word.orig_show) * 100;
-    var p2 = parseFloat(word.trans_succ) / parseFloat(word.trans_show) * 100;
-    if (isNaN(p1)) {
-        p1 = "none"; 
-    } else {
-        p1 = Math.floor(p1) + "%";
-    }
-    if (isNaN(p2)) {
-        p2 = "none"; 
-    } else {
-        p2 = Math.floor(p2) + "%";
-    }
+    var p1 = stat_count(word.orig_succ, word.orig_show);
+    var p2 = stat_count(word.trans_succ, word.trans_show);
      
     var fields = [word.id, word.orig, word.trans, word.sample, p1, p2];
     var fieldnames = ['id', 'orig', 'trans', 'sample', 'origStats', 'transStats'];
