@@ -27,7 +27,7 @@ body { font-family: Verdana; }
 #wt table *.prelastcol { border-right: 1px black solid; }
 #wt table tbody > tr:last-child { border-bottom: 1px black solid; }
 #wt table *.lastcol { border-right: 1px white solid; background-color: white !important; }
-#wt table tbody > tr:last-child .lastcol { border-bottom: 1px white solid !important; }
+#wt table tbody > tr:last-child .lastcol { border-bottom: 1px white solid; }
 
 #wt table thead th:first-child { display: none; }
 #wt table tbody td:first-child { display: none; }

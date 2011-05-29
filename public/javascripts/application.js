@@ -16,10 +16,8 @@ function confirm_edit_word_in_table(event) {
     for (var wordn = 0; wordn < words.length; wordn++) {
         var changed = false;
         var id = words[wordn].word.id;
-        log('id ' + id);
         var arr1 = $('.word' + id + ' .tdshow');
         var arr2 = $('.word' + id + ' .tdedit input');
-        log(arr1.length + ' ' + arr2.length);
         for (var i = 0; i < arr1.length; i++) {
             if ($(arr1[i]).html() != arr2[i].value) {
                 $(arr1[i]).html(arr2[i].value);
@@ -33,11 +31,11 @@ function confirm_edit_word_in_table(event) {
             words[wordn].word.orig = $('.word' + id + ' .orig').html();
             words[wordn].word.trans = $('.word' + id + ' .trans').html();
             words[wordn].word.sample = $('.word' + id + ' .sample').html();
-            log(words[wordn]);
+            var ws = '{id:"' + id + '", orig:"' + words[wordn].word.orig + '", trans:"' + words[wordn].word.trans + '", sample:"' + words[wordn].word.sample + '"}';
             $.ajax({
                 type: 'POST',
                 url: '/api/edit/' + id,
-                data: words[wordn].word
+                data: ws
             });
         }
     }
