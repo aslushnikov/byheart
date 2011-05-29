@@ -37,7 +37,7 @@ function confirm_edit_word_in_table(event) {
         var id = words[wordn].word.id;
         var arr1 = $('.word' + id + ' .tdshow');
         var arr2 = $('.word' + id + ' .tdedit input');
-        for (var i = 0; i < arr1.length; i++) {
+        for (var i = 0; i < arr1.length && i < arr2.length; i++) {
             if ($(arr1[i]).html() != arr2[i].value) {
                 $(arr1[i]).html(arr2[i].value);
                 changed = true;
@@ -73,15 +73,32 @@ function delete_word_from_table(id) {
 
 function add_word_to_table(word) {
     var s = '';
-    var fields = [word.id, word.orig, word.trans, word.sample];
-    var fieldnames = ['id', 'orig', 'trans', 'sample'];
+    var p1 = parseFloat(word.orig_succ) / parseFloat(word.orig_show) * 100;
+    var p2 = parseFloat(word.trans_succ) / parseFloat(word.trans_show) * 100;
+    if (isNaN(p1)) {
+        p1 = "none"; 
+    } else {
+        p1 = p1 + "%";
+    }
+    if (isNaN(p2)) {
+        p2 = "none"; 
+    } else {
+        p2 = p2 + "%";
+    }
+     
+    var fields = [word.id, word.orig, word.trans, word.sample, p1, p2];
+    var fieldnames = ['id', 'orig', 'trans', 'sample', 'origStats', 'transStats'];
     for (var i = 0; i < fields.length; i++) {
         s += '<td';
         if (i == fields.length - 1) s += ' class="prelastcol"';
         s += '><span class="tdshow wrd ' + fieldnames[i];
         s += '">' + fields[i] + '</span>';
         s += '<span class="tdedit wrd ' + fieldnames[i] + '" style="display: none;">';
-        s += '<input onkeypress="confirm_edit_word_in_table(event)" class="title" type="text" value="' + fields[i] + '">';
+        if (i <= 3) {
+            s += '<input onkeypress="confirm_edit_word_in_table(event)" class="editwordinput" type="text" value="' + fields[i] + '">';
+        } else {
+            s += fields[i];
+        }
         s += '</span></td>';
     }
     s += '<td class="lastcol"><span class="ctrl' + word.id + '" style="visibility: hidden;">';
