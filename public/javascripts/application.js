@@ -5,9 +5,28 @@ function log(s) {
     $('#log').append(s + '\n');
 }
 
+function update_table_view() {
+    var arr = $('#wt table tbody > tr');
+    var n = arr.length;
+    var last = false;
+    for (var i = n - 1; i >= 0; i--) {
+        if ($(arr[i]).css('display') == 'none') continue;
+        if (!last) {
+            $(arr[i]).css('border-bottom', '1px solid black');
+            $(arr[i]).children('.lastcol').css('border-bottom', '1px solid white');
+            last = true;
+        } else {
+            $(arr[i]).css('border-bottom', 'none');
+            // $(arr[i]).children('.lastcol').css('border-bottom', '1px solid white');
+        }
+    }
+}
+
 function edit_word_in_table(id) {
     $('.word' + id + ' .tdshow').css('display', 'none');
     $('.word' + id + ' .tdedit').css('display', 'inline');
+    update_table_view();
+    $($('.word' + id + ' .tdedit.orig input')[0]).focus();
 }
 
 function confirm_edit_word_in_table(event) {
@@ -27,16 +46,17 @@ function confirm_edit_word_in_table(event) {
         $('.tdshow').css('display', 'inline');
         $('.tdedit').css('display', 'none');
         if (changed) {
-            words[wordn].word.id = $('.word' + id + ' .id').html();
-            words[wordn].word.orig = $('.word' + id + ' .orig').html();
-            words[wordn].word.trans = $('.word' + id + ' .trans').html();
-            words[wordn].word.sample = $('.word' + id + ' .sample').html();
+            words[wordn].word.id = $('.word' + id + ' .tdshow.id').html();
+            words[wordn].word.orig = $('.word' + id + ' .tdshow.orig').html();
+            words[wordn].word.trans = $('.word' + id + ' .tdshow.trans').html();
+            words[wordn].word.sample = $('.word' + id + ' .tdshow.sample').html();
             var ws = '{id:"' + id + '", orig:"' + words[wordn].word.orig + '", trans:"' + words[wordn].word.trans + '", sample:"' + words[wordn].word.sample + '"}';
             $.ajax({
                 type: 'POST',
                 url: '/api/edit/' + id,
                 data: ws
             });
+            update_table_view();
         }
     }
 }
@@ -44,6 +64,7 @@ function confirm_edit_word_in_table(event) {
 
 function delete_word_from_table(id) {
     $('.word' + id).remove();
+    update_table_view();
     $.ajax({
         type: 'POST',
         url: '/api/delete/' + id
@@ -59,8 +80,8 @@ function add_word_to_table(word) {
         if (i == fields.length - 1) s += ' class="prelastcol"';
         s += '><span class="tdshow wrd ' + fieldnames[i];
         s += '">' + fields[i] + '</span>';
-        s += '<span class="tdedit wrd" style="display: none;">';
-        s += '<input onkeypress="confirm_edit_word_in_table(event)" type="text" value="' + fields[i] + '">';
+        s += '<span class="tdedit wrd ' + fieldnames[i] + '" style="display: none;">';
+        s += '<input onkeypress="confirm_edit_word_in_table(event)" class="title" type="text" value="' + fields[i] + '">';
         s += '</span></td>';
     }
     s += '<td class="lastcol"><span class="ctrl' + word.id + '" style="visibility: hidden;">';
@@ -88,6 +109,7 @@ function add_word_to_table(word) {
         arr[0].style.visibility = 'hidden';
     });
     $('#wt table tbody').append(row);
+    update_table_view();
 }
 
 function add() {
