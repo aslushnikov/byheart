@@ -3,7 +3,9 @@
 
 body { font-family: Verdana; font-size: 10pt; } 
 
-#userinfo { float: right; }
+.centered { text-align: center; }
+
+#userinfo { float: right; text-align: right; }
 #userinfo .name { font-weight: bold; }
 
 .round { border-radius: 8px; -moz-border-radius: 8px; -webkit-border-radius: 8px; }
