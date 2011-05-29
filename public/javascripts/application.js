@@ -111,8 +111,6 @@ function add_word_to_table(word) {
         s += '</span></td>';
     }
     s += '<td class="lastcol"><span class="ctrl' + word.id + '" style="visibility: hidden;">';
-    s += '<span onclick="edit_word_in_table(' + word.id + ')"><img src="/images/edit_word.png"></span>';
-    s += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     s += '<span onclick="delete_word_from_table(' + word.id + ')"><img src="/images/delete.png"></span>';
     s += '</td>';
     var row = $('<tr></tr>');
@@ -133,6 +131,9 @@ function add_word_to_table(word) {
         for (var i = 0; i < arr.length; i++) arr[i].style.backgroundColor = '#fff';
         arr = $('.ctrl' + word.id);
         arr[0].style.visibility = 'hidden';
+    });
+    row.click(function() {
+        edit_word_in_table(word.id);
     });
     $('#wt table tbody').append(row);
     update_table_view();

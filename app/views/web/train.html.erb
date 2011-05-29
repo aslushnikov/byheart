@@ -1,4 +1,5 @@
 <script type="text/javascript">
+    $('body').css('overflow-y', 'scroll');
     var ANIMATION_SPEED = 200; // in ms
     var words = <%= @words.to_json.html_safe %>;
     var train_direction = <%= "\"#{@train_mode}\"".html_safe %>;
