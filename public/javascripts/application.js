@@ -78,12 +78,12 @@ function add_word_to_table(word) {
     if (isNaN(p1)) {
         p1 = "none"; 
     } else {
-        p1 = p1 + "%";
+        p1 = Math.floor(p1) + "%";
     }
     if (isNaN(p2)) {
         p2 = "none"; 
     } else {
-        p2 = p2 + "%";
+        p2 = Math.floor(p2) + "%";
     }
      
     var fields = [word.id, word.orig, word.trans, word.sample, p1, p2];
