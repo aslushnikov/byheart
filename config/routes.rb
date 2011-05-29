@@ -11,7 +11,7 @@ Byheart::Application.routes.draw do
   devise_for :users
   
   authenticate :user do
-    root :to => "web#home"
+    root :to => redirect("/web/home")
   end
   devise_scope :user do
     root :to => "devise/sessions#new"
