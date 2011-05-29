@@ -1,12 +1,28 @@
 <script type="text/javascript">
+    String.prototype.has = function(str){
+        return (this.indexOf(str) >= 0);
+    }
     var words = <%= @words.to_json.html_safe %>;
     $(document).ready(function(){
         $.each(words, function(index, value) {
             add_word_to_table(value.word);
         });
     });
+
+    function update_table(prefix) {
+        $.each(words, function(index, value) {
+            word = value.word;
+            if (word.trans.has(prefix) || 
+                word.orig.has(prefix) || 
+                word.sample.has(prefix)) {
+                $('.word' + word.id).show();
+            } else {
+                $('.word' + word.id).hide();
+            }
+        });
+    }
 </script>
-<input type="field" onkeyup="" placeholder="search"/>
+<input type="field" onkeyup="update_table(this.value)" placeholder="search"/>
 <div id="wt">
 <table><thead>
 <tr><th>#</th><th>original</th><th>translation</th><th class="prelastcol">sample</th><td class="lastcol"></td></tr>
