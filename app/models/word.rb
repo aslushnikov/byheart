@@ -4,6 +4,9 @@ class Word < ActiveRecord::Base
 
   protected
     def default_values 
+      self.orig ||= ""
+      self.trans ||= ""
+      self.sample ||= ""
       self.orig_show = 0
       self.orig_succ = 0
       self.trans_show = 0
