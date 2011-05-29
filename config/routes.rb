@@ -9,8 +9,13 @@ Byheart::Application.routes.draw do
   get "web/train_trans"
 
   devise_for :users
-
-  root :to => "pages#home"
+  
+  authenticate :user do
+    root :to => "web#home"
+  end
+  devise_scope :user do
+    root :to => "devise/sessions#new"
+  end
 
   get 'api/check_auth'
   post 'api/add_words'
