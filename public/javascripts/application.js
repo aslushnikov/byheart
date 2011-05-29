@@ -5,22 +5,28 @@ function log(s) {
     $('#log').append(s + '\n');
 }
 
+function edit_word_in_table(id) {
+    log('edit ' + id);
+}
+
 function delete_word_from_table(id) {
     $('.word' + id).remove();
     $.ajax({
         type: 'POST',
-        url: '/api/delete/' + id,
-        success: function(data) {
-        }
+        url: '/api/delete/' + id
     });
 }
 
 function add_word_to_table(word) {
-    var s = '<td>' + word.id + '</td><td>' + word.orig + '</td><td>' + word.trans + '</td><td class="prelastcol">' + word.sample + '</td>';
+    var s = '';
+    var fields = [word.id, word.orig, word.trans];
+    for (var i = 0; i < fields.length; i++)
+        s += '<td><span class="tdshow">' + fields[i] + '</span><span class="tdedit"></span></td>';
+    s += '<td class="prelastcol">' + word.sample + '</td>';
     s += '<td class="lastcol"><span class="ctrl' + word.id + '" style="visibility: hidden;">';
+    s += '<span onclick="edit_word_in_table(' + word.id + ')"><img src="/images/edit_word.png"></span>';
+    s += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
     s += '<span onclick="delete_word_from_table(' + word.id + ')"><img src="/images/delete.png"></span>';
-    s += '&nbsp;&nbsp;&nbsp;';
-    s += '<img src="/images/edit_word.png"></span>';
     s += '</td>';
     var row = $('<tr></tr>');
     row.html(s);
