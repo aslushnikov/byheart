@@ -44,7 +44,7 @@
         curNew.removeAttr("id");
         curNew.children(".buttons").slideUp(ANIMATION_SPEED);
         curNew.children(".opposite").show();
-        curNew.children("a").hide();
+        curNew.children(".trlink").hide();
     }
 
     // показывает новое слово
@@ -55,13 +55,13 @@
 
     // действия, если чувак считает, что знает это слово
     function succ() {
-        $("#words #new").removeClass("notice").addClass("success");
+        $("#words #new").removeClass("notice").addClass("wordok").prepend("<img style='float:right' src='/images/ok.png'>");
         send_stats(true);
     }
 
     // действия, если чувак считает, что _не_ знает это слово
     function fail() {
-        $("#words #new").removeClass("notice").addClass("error");
+        $("#words #new").removeClass("notice").addClass("wordno").prepend("<img style='float:right' src='/images/no.png'>");
         send_stats(false);
     }
     $(document).ready(function() {
@@ -69,13 +69,13 @@
     });
 </script>
 
-<div id="template" class="notice hide round">
+<div id="template" class="tw hide round">
     <div class="word"></div>
-    <a href="javascript:$('#words #new').children('.opposite').slideToggle(ANIMATION_SPEED)">translation</a>
+    <div class="trlink"><a href="javascript:$('#words #new').children('.opposite').slideToggle(ANIMATION_SPEED)">translation</a></div>
     <div class="opposite hide"></div>
     <div class="buttons">
-        <input type="button" value="шарю" onclick="succ();new_word()"/>
-        <input type="button" value="НЕ шарю" onclick="fail();new_word()"/>
+        <input class="kbtn round" type="button" value="шарю" onclick="succ();new_word()"/>
+        <input class="dkbtn round" type="button" value="НЕ шарю" onclick="fail();new_word()"/>
     </div>
 </div>
 

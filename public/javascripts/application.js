@@ -81,7 +81,7 @@ function add_word_to_table(word) {
         s += '><span class="tdshow wrd ' + fieldnames[i];
         s += '">' + fields[i] + '</span>';
         s += '<span class="tdedit wrd ' + fieldnames[i] + '" style="display: none;">';
-        s += '<input onkeypress="confirm_edit_word_in_table(event)" class="title" type="text" value="' + fields[i] + '">';
+        s += '<input onkeypress="confirm_edit_word_in_table(event)" class="editwordinput" type="text" value="' + fields[i] + '">';
         s += '</span></td>';
     }
     s += '<td class="lastcol"><span class="ctrl' + word.id + '" style="visibility: hidden;">';
