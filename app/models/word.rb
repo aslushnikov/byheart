@@ -7,9 +7,9 @@ class Word < ActiveRecord::Base
       self.orig ||= ""
       self.trans ||= ""
       self.sample ||= ""
-      self.orig_show = 0
-      self.orig_succ = 0
-      self.trans_show = 0
-      self.trans_succ = 0
+      self.orig_show ||= 0
+      self.orig_succ ||= 0
+      self.trans_show ||= 0
+      self.trans_succ ||= 0
     end
 end
